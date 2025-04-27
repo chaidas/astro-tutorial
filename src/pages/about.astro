@@ -1,7 +1,5 @@
 ---
-import Header from "../components/Header.astro";
-import "../styles/global.css";
-import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 const currentPage = "about";
 const pageTitle = "About Me";
 const identity = {
@@ -32,47 +30,32 @@ const happy = true;
 const skillColor = "tomato";
 const fontWeight = "bold";
 ---
-
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-        <style define:vars={{ skillColor, fontWeight }}>
-            h1 {
-                /* This is scoped to this specific about.astro component! */
-                color: Purple;
-                font-size: 4rem;
-            }
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-            }
-        </style>
-    </head>
-    <body>
-        <Header />
-        <h1>{pageTitle}</h1>
-        <p>Here are a few facts about me:</p>
-        <ul>
-            <li>First Name: {identity.firstName}</li>
-            <li>Country: {identity.country}</li>
-            <li>Occupation: {identity.occupation}</li>
-        </ul>
-        <h2>Hobbies:</h2>
-        <ul>
-            {identity.hobbies.map((hobby) => <li>{hobby}</li>)}
-        </ul>
-        <h2>My skills:</h2>
-        <ul>
-            {skills.map((skill) => <li class="skill">{skill}</li>)}
-        </ul>
-        <p>I'm currently: {happy === true ? "Happy!" : "Not very happy"}</p>
-        <Footer />
-        <script>
-            import "../scripts/menu.js";
-        </script>
-    </body>
-</html>
+<BaseLayout currentPage={currentPage} pageTitle={pageTitle}>
+    <style define:vars={{ skillColor, fontWeight }}>
+        h1 {
+            /* This is scoped to this specific about.astro component! */
+            color: Purple;
+            font-size: 4rem;
+        }
+        .skill {
+            color: var(--skillColor);
+            font-weight: var(--fontWeight);
+        }
+    </style>
+    <h1>This is a scoped H1</h1>
+    <p>Here are a few facts about me:</p>
+    <ul>
+        <li>First Name: {identity.firstName}</li>
+        <li>Country: {identity.country}</li>
+        <li>Occupation: {identity.occupation}</li>
+    </ul>
+    <h2>Hobbies:</h2>
+    <ul>
+        {identity.hobbies.map((hobby) => <li>{hobby}</li>)}
+    </ul>
+    <h2>My skills:</h2>
+    <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+    <p>I'm currently: {happy === true ? "Happy!" : "Not very happy"}</p>
+</BaseLayout>
