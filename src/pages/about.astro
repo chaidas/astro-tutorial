@@ -1,0 +1,74 @@
+---
+import "../styles/global.css";
+
+const pageTitle = "About Me";
+const identity = {
+    firstName: "Rincewind",
+    country: "Ankh-Morpork",
+    occupation: "Wizard",
+    hobbies: [
+        "Reading",
+        "Writing",
+        "Exploring the Unseen University",
+        "Avoiding Death",
+        "Drinking Tea",
+    ],
+};
+const skills = [
+    "Running away from danger",
+    "Accidentally setting things on fire",
+    "Talking to inanimate objects",
+    "Getting lost in the Library",
+];
+const happy = true;
+
+/*
+    The Astro <style> tag can also reference any variables from your frontmatter script using the
+    define:vars={ {...} } directive. You can define variables within your code fence, then use them as
+    CSS variables in your style tag (!)
+ */
+const skillColor = "tomato";
+const fontWeight = "bold";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+        <style define:vars={{ skillColor, fontWeight }}>
+            h1 {
+                /* This is scoped to this specific about.astro component! */
+                color: Purple;
+                font-size: 4rem;
+            }
+            .skill {
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+            }
+        </style>
+    </head>
+    <body>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/blog">Blog</a>
+        <h1>{pageTitle}</h1>
+        <p>Here are a few facts about me:</p>
+        <ul>
+            <li>First Name: {identity.firstName}</li>
+            <li>Country: {identity.country}</li>
+            <li>Occupation: {identity.occupation}</li>
+        </ul>
+        <h2>Hobbies:</h2>
+        <ul>
+            {identity.hobbies.map((hobby) => <li>{hobby}</li>)}
+        </ul>
+        <h2>My skills:</h2>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+        <p>I'm currently: {happy === true ? "Happy!" : "Not very happy"}</p>
+    </body>
+</html>

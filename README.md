@@ -18,7 +18,8 @@ Added Prettier with `npm i --save-dev prettier prettier-plugin-astro` and then a
     }
 }
 ```
-- "plugins" was needed in order for webstorm to be able to format on CMD+SHIFT+OPT+P correctly `.astro` files.
+
+Note that "plugins" was needed in order for webstorm to be able to format on CMD+SHIFT+OPT+P correctly `.astro` files.
 
 ## Project Structure
 
